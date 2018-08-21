@@ -1,0 +1,99 @@
+<div class="well well-lg wellHeight">
+  <div class="form-group">
+    <div class="col-sm-6">
+      <label for="Task" class="control-label col-sm-2">Task:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Task" [(ngModel)]="filterTask" (blur)="filterByTask()" required/>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-6">
+      <label for="ParentTask" class="control-label col-sm-2">Parent Task:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="ParentTask" [(ngModel)]="filterParentTask" (blur)="filterByParent()" required/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row"></div>
+
+  <div class="form-group">
+    <div class="col-sm-6">
+      <label for="PriorityFrom" class="control-label col-sm-2">Priority From:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="PriorityFrom" type="number" [(ngModel)]="filterPriorityFrom" (blur)="filterByPriorityFrom()"
+          required/>
+      </div>
+      <label for="PriorityTo" class="control-label col-sm-2">Priority To:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="PriorityTo" type="number" [(ngModel)]="filterPriorityTo" (blur)="filterByPriorityTo()"
+          required/>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-6">
+      <label for="StartDate" class="control-label col-sm-2">Start Date:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="StartDate" type="date" [(ngModel)]="filterStartDate" (blur)="filterByStartDate()"
+        />
+      </div>
+      <label for="EndDate" class="control-label col-sm-2">End Date:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="EndDate" type="date" [(ngModel)]="filterEndDate" (blur)="filterByEndDate()" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row"></div>
+
+<table class="table">
+  <tbody>
+    <!-- <tr *ngFor="let task of tasks$ | async">  -->
+    <tr *ngFor="let task of filteredTasks">
+      <td>
+        <div>
+          <b>Task</b>
+        </div>
+        <div class="divTaskDisplay">
+          {{task.TaskInfo}}
+        </div>
+      </td>
+      <td>
+        <div>
+          <b>Parent</b>
+        </div>
+        <div class="divTaskDisplay">
+          {{task.ParentTask}}
+        </div>
+      </td>
+      <td>
+        <div>
+          <b>Priority</b>
+        </div>
+        <label class="labelPosition">{{task.Priority}}</label>
+      </td>
+      <td>
+        <div>
+          <b>Start</b>
+        </div>
+        <label class="labelPosition">{{task.StartDate | date:'shortDate'}}</label>
+      </td>
+      <td>
+        <div>
+          <b>End</b>
+        </div>
+        <label class="labelPosition">{{task.EndDate | date:'shortDate'}}</label>
+      </td>
+      <td>
+        <a routerLink="/Edit/{{task.TaskId}}">
+          <button class="btn btn-primary editBtnPos" [disabled]="task.IsTaskEnded">
+            Edit</button>
+        </a>
+        <input type="button" class="btn btn-success btn-sm endBtnPos" value="End Task" (click)="endTask(task.TaskId)" [disabled]="task.IsTaskEnded">
+      </td>
+    </tr>
+  </tbody>
+</table>

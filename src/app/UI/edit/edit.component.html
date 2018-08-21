@@ -1,0 +1,47 @@
+<label class="label label-success">{{successMessage}}</label>
+<label class="label label-danger">{{failureMessage}}</label>
+<fieldset>    
+  <legend>Add New Task</legend>  
+  <div class="col-md-10">
+    <form class="form-horizontal" ngNativeValidate #myForm="ngForm">
+      <div class="form-group">
+        <label class="control-label col-md-2" for="TaskName">Task:</label>
+        <div class="col-md-5">
+          <input type="text" id="TaskName" name="TaskName" [(ngModel)]="taskName" class="form-control col-md-4" placeholder="Enter Task Detail" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="TaskPriority">Priority:</label>
+        <div class="col-md-5">
+          <input type="text" id="TaskPriority" name="TaskPriority" [(ngModel)]="priority"  class="form-control col-md-4" type="range" min="1" max="30" step="1" required (change)="show_value()">
+          <span class="label label-warning pull-right">{{sliderVal}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="ParentTask">Parent Task:</label>
+        <div class="col-md-5">
+          <input type="text" id="ParentTask" name="ParentTask" [(ngModel)]="parentTask" class="form-control col-md-4" placeholder="Enter Parent Task Detail">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="StartDate">Start Date:</label>
+        <div class="col-md-5">
+          <input type="text" id="StartDate" name="startDate" [(ngModel)]="startDate" class="form-control col-md-4" type="date" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="EndDate">End Date:</label>
+        <div class="col-md-5">
+            <input type="text" id="EndDate" name="EndDate" [(ngModel)]="endDate" class="form-control col-md-4" type="date" required>
+        </div>
+      </div>
+      <div class="form-group">
+          <div class="col-md-6">
+                <input type="submit" value="Update Task" id="btnUpdate" class="col-md-offset-5 btn btn-primary" (click)="updateTask()" [disabled]="!myForm.form.valid"/>                
+                <input type="button" value="Reset" id="btnReset" class="col-md-offset-1 btn btn-secondary" (click)="resetFields()"/> 
+            </div>
+        </div>
+      </form>
+  </div>
+</fieldset>
+
